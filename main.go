@@ -1,4 +1,5 @@
-package testHelper
+// package goTestHelper stores some helper func for testing package
+package goTestHelper
 
 import (
 	"reflect"
