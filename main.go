@@ -1,4 +1,4 @@
-// package goTestHelper stores some helper func for testing package
+// Package goTestHelper stores some helper func for testing package
 package goTestHelper
 
 import (
@@ -6,7 +6,14 @@ import (
 	"testing"
 )
 
-// ExpectError is a testing tool, it used to test for error handling
+// OK fails the test if err is not nil
+func OK(t *testing.T, err error) {
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+// ExpectError fails the test if the f didn't fail
 func ExpectError(name string, t *testing.T, f func()) {
 	defer func(t *testing.T) {
 		err := recover()
@@ -18,8 +25,8 @@ func ExpectError(name string, t *testing.T, f func()) {
 	f()
 }
 
-// Diff is simply test if there are differences of 2 structs
-func Diff(got, want interface{}, t *testing.T) {
+// Equal fails the test if got is not equal to want
+func Equal(got, want interface{}, t *testing.T) {
 	if !reflect.DeepEqual(want, got) {
 
 		t.Errorf(

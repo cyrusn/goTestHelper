@@ -1,5 +1,5 @@
 # Golang test helper
 
 Some simple helpers func for test
-- `ExpectError(name string, *testing.T, callback)`
-- `Diff(got, want interface{}, t *testing.T)`
+- `OK(name string, *testing.T, callback)`
+- `Equal(got, want interface{}, t *testing.T)`
