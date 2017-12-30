@@ -13,7 +13,7 @@ func OK(t *testing.T, v interface{}) {
 	}
 }
 
-// Panic fails the test if the f didn't fail
+// Panic fails the test if the f didn't call panic()
 func Panic(name string, t *testing.T, f func()) {
 	defer func(t *testing.T) {
 		if err := recover(); err == nil {
@@ -26,6 +26,17 @@ func Panic(name string, t *testing.T, f func()) {
 // Equal fails the test if got is not equal to want
 func Equal(got, want interface{}, t *testing.T) {
 	if !reflect.DeepEqual(want, got) {
+		t.Errorf(
+			"Incorrect!\ngot: %v\nwant: %v.\n",
+			got,
+			want,
+		)
+	}
+}
+
+// NotEqual fails the test if got is equal to want
+func NotEqual(got, want interface{}, t *testing.T) {
+	if reflect.DeepEqual(want, got) {
 		t.Errorf(
 			"Incorrect!\ngot: %v\nwant: %v.\n",
 			got,
