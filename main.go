@@ -9,6 +9,7 @@ import (
 // OK fails the test if v is not nil
 func OK(t *testing.T, v interface{}) {
 	if v != nil {
+		t.Helper()
 		t.Fatal(v)
 	}
 }
@@ -17,6 +18,7 @@ func OK(t *testing.T, v interface{}) {
 func Panic(name string, t *testing.T, f func()) {
 	defer func(t *testing.T) {
 		if err := recover(); err == nil {
+			t.Helper()
 			t.Fatalf("Error Test: [%s] did not return error", name)
 		}
 	}(t)
@@ -26,6 +28,7 @@ func Panic(name string, t *testing.T, f func()) {
 // Equal fails the test if got is not equal to want
 func Equal(got, want interface{}, t *testing.T) {
 	if !reflect.DeepEqual(want, got) {
+		t.Helper()
 		t.Errorf(
 			"Incorrect!\ngot: %v\nwant: %v.\n",
 			got,
@@ -37,6 +40,7 @@ func Equal(got, want interface{}, t *testing.T) {
 // NotEqual fails the test if got is equal to want
 func NotEqual(got, want interface{}, t *testing.T) {
 	if reflect.DeepEqual(want, got) {
+		t.Helper()
 		t.Errorf(
 			"Incorrect!\ngot: %v\nwant: %v.\n",
 			got,
