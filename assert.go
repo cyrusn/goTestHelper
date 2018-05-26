@@ -14,12 +14,12 @@ func OK(t *testing.T, v interface{}) {
 	}
 }
 
-// Panic fails the test if the f didn't call panic()
+// Panic fails the test if the f didn't run panic()
 func Panic(name string, t *testing.T, f func()) {
 	defer func(t *testing.T) {
 		if err := recover(); err == nil {
 			t.Helper()
-			t.Fatalf("Error Test: [%s] did not return error", name)
+			t.Fatalf("err should not nil [%s]", name)
 		}
 	}(t)
 	f()

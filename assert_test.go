@@ -28,5 +28,4 @@ func TestMain(t *testing.T) {
 			panic("panic now")
 		})
 	})
-
 }
